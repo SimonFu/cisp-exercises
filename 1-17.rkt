@@ -1,15 +1,12 @@
 #lang sicp
 
-(define (fast_exp x n)
+(define (fast_mul a b)
+  (define (double x)
+    (* x 2))
+  (define (halve x)
+    (/ x 2))
   (define (even? x)
     (= (remainder x 2) 0))
-  
-  (define (square x)
-    (* x x))
-  
-  (define (exp_iter val x n)
-    (cond ((= n 1) (* val x))
-          ((even? n) (exp_iter val (square x) (/ n 2)))
-          (else (exp_iter (* val x) x (- n 1)))))
-  
-  (exp_iter 1 x n))
+  (cond ((= b 0) 0)
+        ((even? b) (fast_mul (double a) (halve b)))
+        (else (+ (fast_mul a (- b 1)) a))))
