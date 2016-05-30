@@ -1,0 +1,38 @@
+#lang sicp
+
+(define (prime? n)
+  (define (square x) (* x x))
+  (define (divisor? n test-divisor)
+    (= (remainder n test-divisor) 0))
+  (define (find-divisor n test-divisor)
+    (cond ((> (square test-divisor) n) n)
+          ((divisor? n test-divisor) test-divisor)
+          (else (find-divisor n (+ test-divisor 1)))))
+  (define (smallest-divisor n)
+    (find-divisor n 2))
+  (= n (smallest-divisor n)))
+
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (runtime)))
+
+(define (report-prime elapsed-time)
+  (display " *** ")
+  (display elapsed-time))
+
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (runtime) start-time))))
+(define (even? x)
+    (= (remainder x 2) 0))
+
+(define (search-for-primes min max)
+  (define (test-and-next min max)
+    (timed-prime-test min)
+    (search-for-primes (+ min 2) max))
+ (cond ((< min max)
+         (if (even? min)
+             (search-for-primes (+ min 1) max)
+             (test-and-next min max)))
+       ))
