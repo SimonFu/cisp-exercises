@@ -8,4 +8,4 @@
                (exchange-money (- total (car items)) items)
                (exchange-money total (cdr items))))))
 
-(exchange-money 100 (list 100 50 20 10 5 1 0.5 0.1))
+(exchange-money 10000 (list 10000 5000 2000 1000 500 100 50 10))
