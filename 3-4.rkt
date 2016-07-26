@@ -12,7 +12,7 @@
            balance))
   
   (define (call-the-cops)
-    (display "Somebody steals my money!\n"))
+    (lambda (x) (display "Somebody steals my money!\n")))
   
   (let ((wrong-times 0))
     (lambda (pw m)
@@ -23,7 +23,7 @@
           (if (>= wrong-times 7)
               (call-the-cops)
               (lambda (x) (begin (set! wrong-times (+ wrong-times 1))
-                                 (display (list wrong-times "Incorrect password\n")))))))))
+                                 (display "Incorrect password\n"))))))))
 
 (define acc (make-account 100 '1234))
 ((acc '1234 'withdraw) 40)
